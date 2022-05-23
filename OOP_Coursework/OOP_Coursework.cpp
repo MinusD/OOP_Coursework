@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "Interpreter.h"
 #include "State.h"
+#include <typeinfo>
 
 using namespace std;
 
@@ -13,9 +14,22 @@ using namespace std;
 
 int main()
 {
-    string input = "http://s/";
-    Interpreter interpreter;
-    cout << "123" << endl;
+    string input = "http://sddd/";
+    Interpreter inter(input); //inter.getInput()
+    try
+    {
+        for (string::const_iterator it = inter.getInput()->begin(); !inter.isLast(it); it++) {
+            cout << *it << endl;
+            inter.next(it);
+        }
+
+    }
+    catch (const std::exception&)
+    {
+        cout << "ERROR" << endl;
+    }
+
+
     //try {
         //input += "/";
         //for (string::const_iterator it = input.begin(); it != input.end(); it++) {
