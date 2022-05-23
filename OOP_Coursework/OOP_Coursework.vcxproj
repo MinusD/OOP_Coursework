@@ -139,16 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="H.cpp" />
     <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="OOP_Coursework.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="StatesList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="H.h" />
     <ClInclude Include="Interpreter.h" />
-    <ClInclude Include="State.h" />
     <ClInclude Include="StateException.h" />
     <ClInclude Include="StatesList.h" />
   </ItemGroup>

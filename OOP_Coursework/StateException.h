@@ -8,9 +8,9 @@ class StateException :
 {
     const std::string msg;
 public:
-    inline StateException(const std::string& msg) : msg(msg) {}
-    inline virtual ~StateException() {}
-    inline virtual const char* what() const throw() { return msg.c_str(); }
+    StateException(const std::string& msg) : msg(msg) {}
+    virtual ~StateException() {}
+    virtual const char* what() const throw() { return msg.c_str(); }
 };
 #endif 
 

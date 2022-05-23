@@ -1,9 +1,43 @@
-#include "StatesList.h"
 #include <iostream>
 #include <string>
 #include <exception>
 #include <stdexcept>
+#include "StatesList.h"
+#include "StateException.h"
 
+
+void H::proceed(std::string::const_iterator& it, Interpreter* interp)
+{
+    std::string pattern = "http://";
+    if (*it == pattern[counter]) {
+        ++counter;
+    } else {
+        throw StateException(std::string("Invalid symbol: ") + *it);
+    }
+    if (counter == 7) interp->setState(D::getInstance());
+}
+
+
+void D::proceed(std::string::const_iterator& it, Interpreter* interp)
+{
+    if (*it >= 'a' && *it <= 'z') {
+        interp->setIsWorked(true);
+    } else if (interp->getIsWorked()) {
+        --it;
+        interp->setState(S::getInstance());
+    } else {
+        throw StateException(std::string("Invalid symbol: ") + *it);
+    }
+}
+
+void S::proceed(std::string::const_iterator& it, Interpreter* interp)
+{
+    
+    if (*it != '/' or interp->getIsWorked()) {
+        throw StateException(std::string("Invalid symbol: ") + *it);
+    }
+    interp->setIsWorked(true);
+}
 
 State& H::getInstance()
 {
@@ -11,23 +45,14 @@ State& H::getInstance()
     return self;
 }
 
-void H::proceed(std::string::const_iterator& it, Interpreter* interp)
+State& D::getInstance()
 {
-    std::cout << "GO" << std::endl;
-    std::string pattern = "http://";
-    for (int i = 0; i < 7; i++) {
-        if (*it == pattern[i]) {
-            std::cout << *it;
-            if (interp->isLast(it))
-            {
-               std::cout << *it;
-            }
-            if (i != 6) it++;
-            continue;
-        }
-        //else {
-        //    throw StateException(std::string("Invalid symbol: ") + *it);
-        //}
-    }
-    //interp->setState(D::getInstance());
+    static D self;
+    return self;
+}
+
+State& S::getInstance()
+{
+    static S self;
+    return self;
 }

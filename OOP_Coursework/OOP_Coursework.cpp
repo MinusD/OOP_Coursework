@@ -3,7 +3,6 @@
 #include <exception>
 #include <stdexcept>
 #include "Interpreter.h"
-#include "State.h"
 #include <typeinfo>
 
 using namespace std;
@@ -14,37 +13,20 @@ using namespace std;
 
 int main()
 {
-    string input = "http://sddd/";
-    Interpreter inter(input); //inter.getInput()
-    try
-    {
+    string input = "http://domen/";
+    Interpreter inter(input);
+    try {
         for (string::const_iterator it = inter.getInput()->begin(); !inter.isLast(it); it++) {
-            cout << *it << endl;
             inter.next(it);
         }
-
+        if (inter.getState().isFinal()) {
+            cout << "OK" << endl;
+        } else {
+            throw runtime_error("Interpreter not in final state");
+        }
+    } catch (const std::exception& e) {
+        cout << e.what() << endl;
+        return 1;
     }
-    catch (const std::exception&)
-    {
-        cout << "ERROR" << endl;
-    }
-
-
-    //try {
-        //input += "/";
-        //for (string::const_iterator it = input.begin(); it != input.end(); it++) {
-        //    interpreter.next(it);
-        //}
-        //if (interpreter.getState().isFinal()) {
-        //    cout << "OK" << endl;
-        //}
-        //else {
-        //    throw runtime_error("Interpreter not in final state");
-        //}
-    //}
-    //catch (exception& e) {
-    //    cout << e.what() << endl;
-    //    return 1;
-    //}
     return 0;
 }
