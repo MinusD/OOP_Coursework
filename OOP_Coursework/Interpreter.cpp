@@ -20,6 +20,7 @@ bool Interpreter::isLast(std::string::const_iterator& it) { return (it == input.
 // Сеттер текущего состояния
 void Interpreter::setState(State& new_state) { is_worked = false; current = &new_state; }
 
+// Сеттер статуса отработки текущего состояния
 void Interpreter::setIsWorked(bool status) { is_worked = status; }
 
 // Переходим в следующую позицию и вызываем обработчик

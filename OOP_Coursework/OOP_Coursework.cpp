@@ -7,10 +7,6 @@
 
 using namespace std;
 
-//enum state { _H, _D, _S };
-//state recognize(const char*);
-
-
 int main()
 {
     string input = "http://domen/";
